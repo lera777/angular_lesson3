@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="card mb-3">
+    <div class="card-body">
+      <form novalidate (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+           type="text"
+            id="name"
+            class="form-control" 
+            [(ngModel)]="item.name" 
+            [ngClass]="{'is-invalid': itemName.errors && form.submitted}"
+            #itemName="ngModel"
+            name="name"
+            required
+            minlength="2"         
+            >
+            <div class="invalid-feedback" [hidden]="!itemName.errors?.required">Item name required</div>
+            <div class="invalid-feedback" [hidden]="!itemName.errors?.minlength">Item name must be at least 2 chars </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Email</label>
+            <input
+             type="text"
+              id="email"
+              class="form-control" 
+              [(ngModel)]="item.email" 
+              [ngClass]="{'is-invalid': itemEmail.errors && form.submitted}"
+              #itemEmail="ngModel"
+              name="email"
+              required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"         
+              >
+              <div class="invalid-feedback" [hidden]="!itemEmail.errors?.required">Email required</div>
+              <div class="invalid-feedback" [hidden]="!itemEmail.errors?.pattern">Please enter correct email </div>
+          </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input 
+            type="number" 
+            id="age" 
+            class="form-control" 
+            min="1" 
+            [(ngModel)]="item.age"
+            [ngClass]="{'is-invalid': itemAge.errors && form.submitted}"
+            #itemAge="ngModel"
+            name="age"
+            required
+            pattern="[0-9]{1,2}" 
+            >
+            <div class="invalid-feedback" [hidden]="!itemAge.errors?.required">Age required</div>
+            <div class="invalid-feedback" [hidden]="!itemAge.errors?.pattern">Please enter right age</div>
+        </div>
+        <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input 
+            type="number" 
+            id="phoneNumber" 
+            class="form-control" 
+            [(ngModel)]="item.phoneNumber"
+            [ngClass]="{'is-invalid': itemPhoneNumber.errors && form.submitted}"
+            #itemPhoneNumber="ngModel"
+            name="phoneNumber"
+            required
+            pattern="[0-9]{10}"              
+            >
+            <div class="invalid-feedback" [hidden]="!itemPhoneNumber.errors?.required">Phone Number required</div>
+            <div class="invalid-feedback" [hidden]="!itemPhoneNumber.errors?.pattern">Phone number should be 10 digits</div>
+        </div>
+        <div class="form-group">
+            <label for="comments">Comments</label>
+            <textarea
+             type="text"
+              id="comments"
+              class="form-control" 
+              [(ngModel)]="item.comments" 
+              [ngClass]="{'is-invalid': itemComments.errors && form.submitted}"
+              #itemComments="ngModel"
+              name="comments"        
+              ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Age</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Comments</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of clientList">
+        <th scope="row">{{ item.id + 1 }}</th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.age }}</td>
+        <td>{{ item.phoneNumber }}</td>
+        <td>{{ item.comments }}</td>
+        <td><button type="button" class="btn btn-danger" (click)="deleteClient(item.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
