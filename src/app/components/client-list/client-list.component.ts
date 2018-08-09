@@ -27,7 +27,7 @@ export class ClientListComponent implements OnInit {
         name: 'Lera',
         email: 'eklera0506@gmail.com',
         age: 31,
-        phoneNumber: 80509450687,
+        phoneNumber: 8050945068,
         comments: 'Angular'
       },
     ];
@@ -52,7 +52,7 @@ export class ClientListComponent implements OnInit {
    console.log(input);
  }
 
- deleteClient(index){
-   this.clientList = this.clientList.filter(item => item.id !== index);
+ deleteClient (index: number) {
+  this.clientList.splice(index, 1)
  }
 }
